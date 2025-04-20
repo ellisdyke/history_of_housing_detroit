@@ -1,0 +1,206 @@
+﻿OBJECTID,Council District,Neighborhood Number,Neighborhood Name,Neighborhoods Site URL
+1,4,103,West End,https://theneighborhoods.org/neighborhoods/west-end
+2,4,105,Chandler Park,https://theneighborhoods.org/neighborhoods/chandler-park
+3,4,100,Riverbend,https://theneighborhoods.org/neighborhoods/riverbend
+4,4,101,Jefferson Chalmers,https://theneighborhoods.org/neighborhoods/jefferson-chalmers
+5,1,29,Riverdale,https://theneighborhoods.org/neighborhoods/riverdale
+6,4,97,Morningside,https://theneighborhoods.org/neighborhoods/morningside
+7,4,92,Cornerstone Village,https://theneighborhoods.org/neighborhoods/cornerstone-village
+8,3,72,Regent Park,https://theneighborhoods.org/neighborhoods/regent-park
+9,1,10,North Rosedale Park,https://theneighborhoods.org/neighborhoods/north-rosedale-park
+10,1,3,Berg-Lahser,https://theneighborhoods.org/neighborhoods/berg-lahser
+11,1,1,Five Points,https://theneighborhoods.org/neighborhoods/five-points
+12,1,32,The Eye,https://theneighborhoods.org/neighborhoods/the-eye
+13,1,5,Old Redford,https://theneighborhoods.org/neighborhoods/old-redford
+14,1,19,Grandmont,https://theneighborhoods.org/neighborhoods/grandmont
+15,1,21,Grandmont #1,https://theneighborhoods.org/neighborhoods/grandmont-1
+16,1,20,Rosedale Park,https://theneighborhoods.org/neighborhoods/rosedale-park
+17,1,23,Minock Park,https://theneighborhoods.org/neighborhoods/minock-park
+18,1,22,Westwood Park,https://theneighborhoods.org/neighborhoods/westwood-park
+19,7,208,Warrendale,https://theneighborhoods.org/neighborhoods/warrendale
+20,7,205,Garden View,https://theneighborhoods.org/neighborhoods/garden-view
+21,7,204,Warren Ave Community,https://theneighborhoods.org/neighborhoods/warren-ave-community
+22,7,183,Far West Detroit,https://theneighborhoods.org/neighborhoods/far-west-detroit
+23,5,120,Marina District,https://theneighborhoods.org/neighborhoods/marina-district
+24,5,111,Arden Park,https://theneighborhoods.org/neighborhoods/arden-park
+25,5,123,Joseph Berry Sub,https://theneighborhoods.org/neighborhoods/joseph-berry-sub
+26,5,125,Indian Village,https://theneighborhoods.org/neighborhoods/indian-village
+27,5,129,Rivertown,https://theneighborhoods.org/neighborhoods/rivertown
+28,5,126,West Village,https://theneighborhoods.org/neighborhoods/west-village
+29,4,102,Conner Creek Industrial,https://theneighborhoods.org/neighborhoods/conner-creek-industrial
+30,1,13,Belmont,https://theneighborhoods.org/neighborhoods/belmont
+31,6,168,Corktown,https://theneighborhoods.org/neighborhoods/corktown
+32,6,176,Boynton,https://theneighborhoods.org/neighborhoods/boynton
+33,6,177,Oakwood Heights,https://theneighborhoods.org/neighborhoods/oakwood-heights
+34,2,37,Blackstone Park,https://theneighborhoods.org/neighborhoods/blackstone-park
+35,6,174,Delray,https://theneighborhoods.org/neighborhoods/delray
+36,6,180,Claytown,https://theneighborhoods.org/neighborhoods/claytown
+37,7,200,Aviation Sub,https://theneighborhoods.org/neighborhoods/aviation-sub
+38,7,199,Barton-McFarland,https://theneighborhoods.org/neighborhoods/barton-mcfarland
+39,5,139,Medical Center,https://theneighborhoods.org/neighborhoods/medical-center
+40,2,58,Bagley,https://theneighborhoods.org/neighborhoods/bagley
+41,2,43,Green Acres,https://theneighborhoods.org/neighborhoods/green-acres
+42,2,46,State Fair,https://theneighborhoods.org/neighborhoods/state-fair
+43,2,45,Palmer Woods,https://theneighborhoods.org/neighborhoods/palmer-woods
+44,2,44,Sherwood Forest,https://theneighborhoods.org/neighborhoods/sherwood-forest
+45,2,51,University District,https://theneighborhoods.org/neighborhoods/university-district
+46,5,127,Islandview,https://theneighborhoods.org/neighborhoods/islandview
+47,6,178,Springwells,https://theneighborhoods.org/neighborhoods/springwells
+48,7,207,Franklin Park,https://theneighborhoods.org/neighborhoods/franklin-park
+49,7,184,Weatherby,https://theneighborhoods.org/neighborhoods/weatherby
+50,1,25,Castle Rouge,https://theneighborhoods.org/neighborhoods/castle-rouge
+51,1,26,Eliza Howell,https://theneighborhoods.org/neighborhoods/eliza-howell
+52,2,50,Detroit Golf,https://theneighborhoods.org/neighborhoods/detroit-golf
+53,1,24,Brightmoor,https://theneighborhoods.org/neighborhoods/brightmoor
+54,6,160,Chadsey Condon,https://theneighborhoods.org/neighborhoods/chadsey-condon
+55,6,162,Woodbridge,https://theneighborhoods.org/neighborhoods/woodbridge
+56,2,33,Greenfield,https://theneighborhoods.org/neighborhoods/greenfield
+57,7,195,Oakman Blvd Community,https://theneighborhoods.org/neighborhoods/oakman-blvd-community
+58,7,197,Nardin Park,https://theneighborhoods.org/neighborhoods/nardin-park
+59,5,156,Petoskey-Otsego,https://theneighborhoods.org/neighborhoods/petoskey-otsego
+60,5,147,Boston Edison,https://theneighborhoods.org/neighborhoods/boston-edison
+61,3,81,Campau/Banglatown,https://theneighborhoods.org/neighborhoods/campau/banglatown
+62,3,84,Conant Gardens,https://theneighborhoods.org/neighborhoods/conant-gardens
+63,3,78,Krainz Woods,https://theneighborhoods.org/neighborhoods/krainz-woods
+64,4,88,LaSalle College Park,https://theneighborhoods.org/neighborhoods/lasalle-college-park
+65,5,130,Elmwood Park,https://theneighborhoods.org/neighborhoods/elmwood-park
+66,5,134,McDougall-Hunt,https://theneighborhoods.org/neighborhoods/mcdougall-hunt
+67,6,169,North Corktown,https://theneighborhoods.org/neighborhoods/north-corktown
+68,5,140,Cultural Center,https://theneighborhoods.org/neighborhoods/cultural-center
+69,6,175,Carbon Works,https://theneighborhoods.org/neighborhoods/carbon-works
+70,6,179,Michigan-Martin,https://theneighborhoods.org/neighborhoods/michigan-martin
+71,5,118,Pingree Park,https://theneighborhoods.org/neighborhoods/pingree-park
+72,2,52,Martin Park,https://theneighborhoods.org/neighborhoods/martin-park
+73,5,119,East Village,https://theneighborhoods.org/neighborhoods/east-village
+74,6,173,Hubbard Farms,https://theneighborhoods.org/neighborhoods/hubbard-farms
+75,7,196,Russell Woods,https://theneighborhoods.org/neighborhoods/russell-woods
+76,5,124,Gold Coast,https://theneighborhoods.org/neighborhoods/gold-coast
+77,3,71,Mohican Regent,https://theneighborhoods.org/neighborhoods/mohican-regent
+78,6,164,Jeffries,https://theneighborhoods.org/neighborhoods/jeffries
+79,5,136,Brewster Homes,https://theneighborhoods.org/neighborhoods/brewster-homes
+80,3,70,Pulaski,https://theneighborhoods.org/neighborhoods/pulaski
+81,6,171,Central Southwest,https://theneighborhoods.org/neighborhoods/central-southwest
+82,6,170,Hubbard Richard,https://theneighborhoods.org/neighborhoods/hubbard-richard
+83,5,153,NW Goldberg,https://theneighborhoods.org/neighborhoods/nw-goldberg
+84,5,137,Douglass,https://theneighborhoods.org/neighborhoods/douglass
+86,5,135,Forest Park,https://theneighborhoods.org/neighborhoods/forest-park
+87,5,131,Lafayette Park,https://theneighborhoods.org/neighborhoods/lafayette-park
+88,5,133,Eastern Market,https://theneighborhoods.org/neighborhoods/eastern-market
+89,5,138,Brush Park,https://theneighborhoods.org/neighborhoods/brush-park
+90,5,116,Gratiot Town/Kettering,https://theneighborhoods.org/neighborhoods/gratiot-town-kettering
+91,3,76,Airport Sub,https://theneighborhoods.org/neighborhoods/airport-sub
+92,3,86,Hawthorne Park,https://theneighborhoods.org/neighborhoods/hawthorne-park
+93,5,115,Poletown East,https://theneighborhoods.org/neighborhoods/poletown-east
+94,2,48,Grixdale Farms,https://theneighborhoods.org/neighborhoods/grixdale-farms
+95,2,49,Palmer Park,https://theneighborhoods.org/neighborhoods/palmer-park
+96,5,144,New Center Commons,https://theneighborhoods.org/neighborhoods/new-center-commons
+97,5,146,Piety Hill,https://theneighborhoods.org/neighborhoods/piety-hill
+98,3,85,Northeast Central District,https://theneighborhoods.org/neighborhoods/northeast-central-district
+99,4,93,East English Village,https://theneighborhoods.org/neighborhoods/east-english-village
+100,6,161,Core City,https://theneighborhoods.org/neighborhoods/core-city
+101,5,145,Virginia Park,https://theneighborhoods.org/neighborhoods/virginia-park
+102,7,187,Plymouth-Hubbell,https://theneighborhoods.org/neighborhoods/plymouth-hubbell
+103,7,201,Joy-Schaefer,https://theneighborhoods.org/neighborhoods/joy-schaefer
+104,3,82,North Campau,https://theneighborhoods.org/neighborhoods/north-campau
+105,2,53,Pilgrim Village,https://theneighborhoods.org/neighborhoods/pilgrim-village
+106,2,55,Fitzgerald/Marygrove,https://theneighborhoods.org/neighborhoods/fitzgerald-marygrove
+107,2,47,Penrose,https://theneighborhoods.org/neighborhoods/penrose
+108,2,59,Schulze,https://theneighborhoods.org/neighborhoods/schulze
+109,2,38,Greenwich,https://theneighborhoods.org/neighborhoods/greenwich
+110,5,157,Jamison,https://theneighborhoods.org/neighborhoods/jamison
+111,2,36,Schaefer 7/8 Lodge,https://theneighborhoods.org/neighborhoods/schaefer-7-8-lodge
+112,2,60,Tri-Point,https://theneighborhoods.org/neighborhoods/tri-point
+113,2,62,College Park,https://theneighborhoods.org/neighborhoods/college-park
+114,2,61,Winship,https://theneighborhoods.org/neighborhoods/winship
+115,3,68,Nortown,https://theneighborhoods.org/neighborhoods/nortown
+116,3,74,Von Steuben,https://theneighborhoods.org/neighborhoods/von-steuben
+117,3,80,Buffalo Charles,https://theneighborhoods.org/neighborhoods/buffalo-charles
+118,7,181,West Outer Drive,https://theneighborhoods.org/neighborhoods/west-outer-drive
+119,7,206,Joy Community,https://theneighborhoods.org/neighborhoods/joy-community
+120,7,185,Southfield Plymouth,https://theneighborhoods.org/neighborhoods/southfield-plymouth
+121,7,188,Paveway,https://theneighborhoods.org/neighborhoods/paveway
+122,7,189,Pride Area Community,https://theneighborhoods.org/neighborhoods/pride-area-community
+123,7,191,Happy Homes,https://theneighborhoods.org/neighborhoods/happy-homes
+124,7,192,Northwest Community,https://theneighborhoods.org/neighborhoods/northwest-community
+125,7,198,Littlefield Community,https://theneighborhoods.org/neighborhoods/littlefield-community
+126,7,202,We Care Community,https://theneighborhoods.org/neighborhoods/we-care-community
+127,7,203,Fiskhorn,https://theneighborhoods.org/neighborhoods/fiskhorn
+128,6,159,Midwest,https://theneighborhoods.org/neighborhoods/midwest
+129,5,154,LaSalle Gardens,https://theneighborhoods.org/neighborhoods/lasalle-gardens
+130,5,155,Wildemere Park,https://theneighborhoods.org/neighborhoods/wildemere-park
+131,5,142,Tech Town,https://theneighborhoods.org/neighborhoods/tech-town
+132,5,141,Medbury Park,https://theneighborhoods.org/neighborhoods/medbury-park
+133,5,113,Russell Industrial,https://theneighborhoods.org/neighborhoods/russell-industrial
+134,5,114,Milwaukee Junction,https://theneighborhoods.org/neighborhoods/milwaukee-junction
+135,4,94,Yorkshire Woods,https://theneighborhoods.org/neighborhoods/yorkshire-woods
+136,5,143,New Center,https://theneighborhoods.org/neighborhoods/new-center
+137,6,166,Downtown,https://theneighborhoods.org/neighborhoods/downtown
+138,4,95,Denby,https://theneighborhoods.org/neighborhoods/denby
+139,6,165,Midtown,https://theneighborhoods.org/neighborhoods/midtown
+140,6,163,Wayne State,https://theneighborhoods.org/neighborhoods/wayne-state
+141,5,148,Historic Atkinson,https://theneighborhoods.org/neighborhoods/historic-atkinson
+142,5,112,North End,https://theneighborhoods.org/neighborhoods/north-end
+143,5,152,Elijah McCoy,https://theneighborhoods.org/neighborhoods/elijah-mccoy
+144,5,109,Dexter-Linwood,https://theneighborhoods.org/neighborhoods/dexter-linwood
+145,3,79,Davison,https://theneighborhoods.org/neighborhoods/davison
+146,3,66,Farwell,https://theneighborhoods.org/neighborhoods/farwell
+147,6,167,West Side Industrial,https://theneighborhoods.org/neighborhoods/west-side-industrial
+148,5,121,Belle Isle,https://theneighborhoods.org/neighborhoods/belle-isle
+149,5,117,Gratiot Woods,https://theneighborhoods.org/neighborhoods/gratiot-woods
+150,7,190,Grand River-I96,https://theneighborhoods.org/neighborhoods/grand-river-i96
+151,7,193,Davison-Schoolcraft,https://theneighborhoods.org/neighborhoods/davison-schoolcraft
+152,2,54,Dexter-Fenkell,https://theneighborhoods.org/neighborhoods/dexter-fenkell
+153,7,182,Rouge Park,https://theneighborhoods.org/neighborhoods/rouge-park
+154,7,186,Plymouth-I96,https://theneighborhoods.org/neighborhoods/plymouth-i96
+155,5,110,Gateway Community,https://theneighborhoods.org/neighborhoods/gateway-community
+156,5,122,Waterworks Park,https://theneighborhoods.org/neighborhoods/waterworks-park
+157,3,77,Grant,https://theneighborhoods.org/neighborhoods/grant
+158,3,87,Greenfield Park,https://theneighborhoods.org/neighborhoods/greenfield-park
+159,2,41,Garden Homes,https://theneighborhoods.org/neighborhoods/garden-homes
+160,4,90,Mapleridge,https://theneighborhoods.org/neighborhoods/mapleridge
+161,4,104,East Canfield,https://theneighborhoods.org/neighborhoods/east-canfield
+162,4,108,Eden Gardens,https://theneighborhoods.org/neighborhoods/eden-gardens
+163,4,107,Wade,https://theneighborhoods.org/neighborhoods/wade
+164,4,106,Ravendale,https://theneighborhoods.org/neighborhoods/ravendale
+165,4,89,Gratiot-Findlay,https://theneighborhoods.org/neighborhoods/gratiot-findlay
+166,4,96,Outer Drive-Hayes,https://theneighborhoods.org/neighborhoods/outer-drive-hayes
+167,4,91,Moross-Morang,https://theneighborhoods.org/neighborhoods/moross-morang
+168,5,128,Gratiot-Grand,https://theneighborhoods.org/neighborhoods/gratiot-grand
+169,4,98,Chandler Park-Chalmers,https://theneighborhoods.org/neighborhoods/chandler-park-chalmers
+170,6,172,Mexicantown,https://theneighborhoods.org/neighborhoods/mexicantown
+171,1,31,South of Six,https://theneighborhoods.org/neighborhoods/south-of-six
+173,1,27,McNichols Evergreen,https://theneighborhoods.org/neighborhoods/mcnichols-evergreen
+174,1,4,Melvern Hill,https://theneighborhoods.org/neighborhoods/melvern-hill
+175,1,7,Evergreen Lahser 7/8,https://theneighborhoods.org/neighborhoods/evergreen-lahser-7-8
+176,1,8,O'Hair Park,https://theneighborhoods.org/neighborhoods/ohair-park
+177,1,11,Crary/St Marys,https://theneighborhoods.org/neighborhoods/crary/st-marys
+178,1,17,Greenfield-Grand River,https://theneighborhoods.org/neighborhoods/greenfield-grand-river
+179,1,15,Cadillac Community,https://theneighborhoods.org/neighborhoods/cadillac-community
+180,1,2,Seven Mile-Rouge,https://theneighborhoods.org/neighborhoods/seven-mile-rouge
+181,1,9,Evergreen-Outer Drive,https://theneighborhoods.org/neighborhoods/evergreen-outer-drive
+182,1,6,Holcomb Community,https://theneighborhoods.org/neighborhoods/holcomb-community
+183,1,12,Hubbell-Puritan,https://theneighborhoods.org/neighborhoods/hubbell-puritan
+184,1,14,Hubbell-Lyndon,https://theneighborhoods.org/neighborhoods/hubbell-lyndon
+185,1,18,Grand River-St Marys,https://theneighborhoods.org/neighborhoods/grand-river-st-marys
+186,3,75,Mount Olivet,https://theneighborhoods.org/neighborhoods/mount-olivet
+187,1,28,Miller Grove,https://theneighborhoods.org/neighborhoods/miller-grove
+188,1,16,Schoolcraft Southfield,https://theneighborhoods.org/neighborhoods/schoolcraft-southfield
+189,5,132,Greektown,https://theneighborhoods.org/neighborhoods/greektown
+190,3,83,Cadillac Heights,https://theneighborhoods.org/neighborhoods/cadillac-heights
+191,3,64,Butler,https://theneighborhoods.org/neighborhoods/butler
+192,3,65,Pershing,https://theneighborhoods.org/neighborhoods/pershing
+193,3,73,Franklin,https://theneighborhoods.org/neighborhoods/franklin
+194,3,69,Conner Creek,https://theneighborhoods.org/neighborhoods/conner-creek
+195,3,63,Nolan,https://theneighborhoods.org/neighborhoods/nolan
+196,3,67,Sherwood,https://theneighborhoods.org/neighborhoods/sherwood
+197,7,194,Chalfonte,https://theneighborhoods.org/neighborhoods/chalfonte
+199,2,34,San Bernardo,https://theneighborhoods.org/neighborhoods/san-bernardo
+200,2,35,Seven Mile Lodge,https://theneighborhoods.org/neighborhoods/seven-mile-lodge
+201,2,40,McDowell,https://theneighborhoods.org/neighborhoods/mcdowell
+202,2,39,Pembroke,https://theneighborhoods.org/neighborhoods/pembroke
+204,2,57,Harmony Village,https://theneighborhoods.org/neighborhoods/harmony-village
+205,2,56,Bethune Community,https://theneighborhoods.org/neighborhoods/bethune-community
+206,4,99,Fox Creek,https://theneighborhoods.org/neighborhoods/fox-creek
+210,5,209,Virginia Park Community,https://theneighborhoods.org/neighborhoods/virginia-park-community
+214,1,30,Oak Grove District 1,https://theneighborhoods.org/neighborhoods/oak-grove
+215,2,42,Oak Grove District 2,https://theneighborhoods.org/neighborhoods/oak-grove
