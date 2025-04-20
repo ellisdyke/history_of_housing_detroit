@@ -15,11 +15,21 @@
     h1, h2 {
       text-align: center;
     }
-    iframe {
-      width: 100%;
-      height: 750px;
-      border: none;
-      margin-top: 2rem;
+    .button-link {
+      display: block;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .button-link a {
+      background-color: #1f77b4;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    .button-link a:hover {
+      background-color: #135b91;
     }
   </style>
 </head>
@@ -38,18 +48,16 @@
   <p>
     Our explorable visualizer focuses on properties sold through the Detroit Land Bank Authority (DLBA) from 2014–2024.
     We show how many of these properties remain unoccupied, while others achieve re-occupancy through Certificates of
-    Occupancy. The animated map below helps illustrate both progress and ongoing challenges in reversing decades of disinvestment.
+    Occupancy. The animated map helps illustrate both progress and ongoing challenges in reversing decades of disinvestment.
   </p>
 
-  <h2>Explore the Data</h2>
-  <p>
-    Use the animation slider or “Play” button to scroll through property activity year by year.
-    Gray dots show properties still owned by DLBA, orange dots represent DLBA sales, and green dots mark parcels
-    that became re-occupied. Together, these layers visualize the slow rebuilding of Detroit’s neighborhoods — and
-    the gaps that remain.
-  </p>
+  <h2>Explore the Visualization</h2>
 
-  <iframe src="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/"></iframe>
+  <div class="button-link">
+    <a href="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/" target="_blank">
+      👉 Launch the Interactive Streamlit App
+    </a>
+  </div>
 
   <p style="margin-top: 2rem;">
     <strong>Group Members:</strong> Nusrat Atika, Christy Choi, Ellis Dyke<br />
