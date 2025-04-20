@@ -4,17 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>History of Housing and Racism in Detroit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 750px;
+      border: none;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; text-align: center; padding: 2rem;">
+<body>
+
   <h1>History of Housing and Racism in Detroit</h1>
-  <p>This interactive visual explores DLBA property sales, occupancy, and unsold lots from 2014–2024.</p>
+
   <p>
-    <a href="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/" target="_blank">
-      👉 Click here to launch the interactive Streamlit app
-    </a>
+    For over a century, housing in Detroit has reflected deeply entrenched racial and economic divides.
+    This project explores how discriminatory policies like redlining, urban renewal, and restrictive covenants
+    shaped who was allowed to live where — and how those patterns persist today. Through interactive data
+    visualizations, we track changes in land use and property ownership that mirror larger patterns of segregation
+    and inequity.
   </p>
-  <iframe src="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/"
-          width="100%" height="800px" style="border:none;">
-  </iframe>
+
+  <p>
+    Our explorable visualizer focuses on properties sold through the Detroit Land Bank Authority (DLBA) from 2014–2024.
+    We show how many of these properties remain unoccupied, while others achieve re-occupancy through Certificates of
+    Occupancy. The animated map below helps illustrate both progress and ongoing challenges in reversing decades of disinvestment.
+  </p>
+
+  <h2>Explore the Data</h2>
+  <p>
+    Use the animation slider or “Play” button to scroll through property activity year by year.
+    Gray dots show properties still owned by DLBA, orange dots represent DLBA sales, and green dots mark parcels
+    that became re-occupied. Together, these layers visualize the slow rebuilding of Detroit’s neighborhoods — and
+    the gaps that remain.
+  </p>
+
+  <iframe src="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/"></iframe>
+
+  <p style="margin-top: 2rem;">
+    <strong>Group Members:</strong> Nusrat Atika, Christy Choi, Ellis Dyke<br />
+    <strong>Data Sources:</strong> Detroit Land Bank Authority (DLBA), City of Detroit Certificates of Occupancy
+  </p>
+
 </body>
 </html>
