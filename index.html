@@ -19,18 +19,22 @@
         ul {
             padding-left: 1.2em;
         }
-        iframe {
-            width: 100%;
-            height: 700px;
-            border: none;
-            margin-top: 1rem;
-        }
-        .link-fallback {
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
-        }
         .section {
             margin-bottom: 2.5rem;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        .button-link:hover {
+            background-color: #004999;
         }
     </style>
 </head>
@@ -56,12 +60,8 @@
         <h2>Interactive Visual: Re-Occupancy of DLBA Properties</h2>
         <p>This interactive visual shows how Detroit's buy-back and sales programs have impacted re-occupancy rates over the past decade. It features an animated timeline map of Detroit Land Bank Authority (DLBA) properties sold between 2014 and 2024. The map shows which properties were sold, which remain vacant, and which achieved re-occupancy through Certificates of Occupancy. It highlights both the progress made and challenges that remain in reversing decades of disinvestment in Detroit’s housing stock.</p>
 
-        <iframe src="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/" allowfullscreen></iframe>
-        <div class="link-fallback">
-            If the embedded app does not load, you can <a href="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/" target="_blank">click here to view it directly</a>.
-        </div>
+        <a class="button-link" href="https://historyofhousingdetroit-2kdjxr2appzvpx8y349aqmf.streamlit.app/" target="_blank">🔗 Launch Interactive Visualizer</a>
     </div>
 
 </body>
 </html>
-
