@@ -11,13 +11,13 @@ with warnings.catch_warnings():
 # --- Title
 st.title("Detroit Housing and Population Trends (1940–2010)")
 st.markdown("""
-Explore changes in Detroit's population, racial demographics, homeownership, and housing values over time.
+Explore changes in Detroit's population, racial demographics, homeownership rates, and housing values over time.
 """)
 
 # --- Load Data
 @st.cache_data
 def load_data():
-    # Load directly from the root/main directory
+    # Load directly from the root directory
     forties = pd.read_csv('1940.csv')
     fifties = pd.read_csv('1950.csv')
     sixties = pd.read_csv('1960.csv')
@@ -52,10 +52,11 @@ def load_data():
     combined_df.drop(index=0, inplace=True)
     combined_df.reset_index(drop=True, inplace=True)
 
-    # Clean datatypes
-    for col in ['Median_Housing_Value', 'Total_Population', 'White_Population', 'Black_Population',
-                'Owner_Occupied', 'OO_White', 'OO_Black']:
-        combined_df[col] = pd.to_numeric(combined_df[col], errors='coerce')
+    # ✅ FIXED: Only try to convert columns that actually exist
+    for col in ['Median_Housing_Value', 'Total_Population', 'White_Population', 'Black_Population', 'Owner_Occupied', 'OO_White', 'OO_Black']:
+        if col in combined_df.columns:
+            combined_df[col] = pd.to_numeric(combined_df[col], errors='coerce')
+
     combined_df['In_City'] = combined_df['In_City'].astype(str)
     combined_df = combined_df[combined_df['In_City'].isin(['Yes', 'No'])]
 
@@ -91,10 +92,9 @@ def adjust_for_inflation(df, year_col, value_col, cpi_data, target_year):
 
 result_df = adjust_for_inflation(df.copy(), 'Year', 'Median_Housing_Value', cpi_data, 2024)
 
-# --- Section 1: Population Trends Over Time
+# --- Section 1: Population Trends
 st.header("Population Trends Over Time by Race and Location")
 
-# Prepare data
 combined_data_long = aggregated_df.melt(
     id_vars=['Year', 'In_City'],
     value_vars=['Total_Population', 'White_Population', 'Black_Population'],
@@ -102,7 +102,6 @@ combined_data_long = aggregated_df.melt(
     value_name='Population'
 )
 
-# Build chart
 population_chart = alt.Chart(combined_data_long).mark_line(point=True).encode(
     x=alt.X('Year:O'),
     y=alt.Y('Population:Q', scale=alt.Scale(domain=[0, 3500000])),
@@ -117,10 +116,9 @@ population_chart = alt.Chart(combined_data_long).mark_line(point=True).encode(
 
 st.altair_chart(population_chart, use_container_width=True)
 
-# --- Section 2: Proportion of Black and White Populations
-st.header("Racial Composition Over Time")
+# --- Section 2: Racial Proportions
+st.header("Proportion of Black and White Populations Over Time")
 
-# Prepare data
 viz_data = combined_data_long.copy()
 viz_data['In_City'] = viz_data['In_City'].replace({
     'No': 'In the Suburbs',
@@ -190,7 +188,7 @@ homeownership_chart = alt.Chart(homeownership_data).mark_line(point=True).encode
 
 st.altair_chart(homeownership_chart, use_container_width=True)
 
-# --- Section 4: Housing Values by Black Population Bracket
+# --- Section 4: Housing Values by Black Population
 st.header("Housing Values by Black Population Bracket")
 
 housing_data = result_df[result_df['In_City'] == 'Yes'].copy()
@@ -234,6 +232,3 @@ st.altair_chart(scatter_chart, use_container_width=True)
 # --- Footer
 st.markdown("---")
 st.markdown("Created with ❤️ by [Your Name] using Streamlit and Altair.")
-
-
-
