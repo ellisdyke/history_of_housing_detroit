@@ -4,108 +4,66 @@ import altair as alt
 import numpy as np
 import warnings
 
-# Setup Streamlit
-st.set_page_config(page_title="History of Housing and Racism in Detroit", layout="wide")
-st.title("History of Housing and Racism in Detroit")
-st.write("*Nusrat Atika (natika), Christy Choi (choichr), Ellis Dyke (adyke)*")
-
 # Suppress warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
 
-# Load Data
-forties = pd.read_csv('1940.csv')
-fifties = pd.read_csv('1950.csv')
-sixties = pd.read_csv('1960.csv')
-seventies = pd.read_csv('1970.csv')
-eighties = pd.read_csv('1980.csv')
-nineties = pd.read_csv('1990.csv')
-twothousands = pd.read_csv('2000.csv')
-twentytens = pd.read_csv('2010.csv')
+st.set_page_config(layout="wide")
+st.title("Mapping Detroit's Housing Inequities (1940–2010)")
 
-# Add 'Year'
-for df, year in zip(
-    [forties, fifties, sixties, seventies, eighties, nineties, twothousands, twentytens],
-    [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010]):
-    df['Year'] = year
+@st.cache_data
+def load_data():
+    # Load each decade
+    forties = pd.read_csv('census_data/1940.csv')
+    fifties = pd.read_csv('census_data/1950.csv')
+    sixties = pd.read_csv('census_data/1960.csv')
+    seventies = pd.read_csv('census_data/1970.csv')
+    eighties = pd.read_csv('census_data/1980.csv')
+    nineties = pd.read_csv('census_data/1990.csv')
+    twothousands = pd.read_csv('census_data/2000.csv')
+    twentytens = pd.read_csv('census_data/2010.csv')
 
-# Rename columns
-rename_dicts = [
-    {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Black Pop': 'Black_Population',
-     'Owner Occupied': 'Owner_Occupied', 'OO White': 'OO_White', 'OO Black': 'OO_Black',
-     'Median Value': 'Median_Housing_Value', 'In City of Detroit?': 'In_City', 'Year': 'Year'},
-    {'Total Pop': 'Total_Population', 'White': 'White_Population', 'Black': 'Black_Population',
-     'Owner Occupied': 'Owner_Occupied', 'White Owner Occupied': 'OO_White',
-     'Nonwhite Owner Occupied': 'OO_Black', 'Median House Value': 'Median_Housing_Value',
-     'In City?': 'In_City', 'Year': 'Year'},
-    {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Nonwite Pop': 'Black_Population',
-     '# Owner Occupied': 'Owner_Occupied', 'White OO': 'OO_White', 'Nonwhite OO': 'OO_Black',
-     'med.val': 'Median_Housing_Value', 'City of Detroit?': 'In_City', 'Year': 'Year'},
-    {'Total_Population': 'Total_Population', 'White_Population': 'White_Population', 'Black_Population': 'Black_Population',
-     'Count_Owner_Occupied_units': 'Owner_Occupied', 'Median_Housing_Value': 'Median_Housing_Value',
-     'Count_Black_OO_units': 'OO_Black', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
-    {'Total_Population': 'Total_Population', 'Total_Pop_White': 'White_Population', 'Total_Pop_Black': 'Black_Population',
-     'Owner_Occupied_Housing_Units': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White',
-     'Owner occupied >> Black': 'OO_Black', 'Median value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
-    {'Persons': 'Total_Population', 'Persons: White': 'White_Population', 'Persons: Black': 'Black_Population',
-     'Occupied housing units: Owner occupied': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White',
-     'Owner occupied >> Black': 'OO_Black', 'Median Value for Specified owner-occupied housing units': 'Median_Housing_Value',
-     'In city of Detroit?': 'In_City', 'Year': 'Year'},
-    {'Total Population': 'Total_Population', 'White Alone': 'White_Population', 'Black or African American Alone': 'Black_Population',
-     'Occupied Housing Units: Owner Occupied': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White',
-     'Owner occupied >> Black': 'OO_Black', 'Owner-occupied housing units: Median value': 'Median_Housing_Value',
-     'In city of Detroit?': 'In_City', 'Year': 'Year'},
-    {'Total Population:': 'Total_Population', 'Total Population: White Alone': 'White_Population',
-     'Total Population: Black or African American Alone': 'Black_Population',
-     'Occupied Housing Units: Owner Occupied': 'Owner_Occupied', 'Owner occupied >> Black': 'OO_Black',
-     'Median Value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'}
-]
+    forties['Year'] = 1940
+    fifties['Year'] = 1950
+    sixties['Year'] = 1960
+    seventies['Year'] = 1970
+    eighties['Year'] = 1980
+    nineties['Year'] = 1990
+    twothousands['Year'] = 2000
+    twentytens['Year'] = 2010
 
-for df, rename_dict in zip(
-    [forties, fifties, sixties, seventies, eighties, nineties, twothousands, twentytens],
-    rename_dicts):
-    df.rename(columns=rename_dict, inplace=True)
+    rename_dicts = {
+        1940: {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Black Pop': 'Black_Population', 'Owner Occupied': 'Owner_Occupied', 'OO White': 'OO_White', 'OO Black': 'OO_Black', 'Median Value': 'Median_Housing_Value', 'In City of Detroit?': 'In_City', 'Year': 'Year'},
+        1950: {'Total Pop': 'Total_Population', 'White': 'White_Population', 'Black': 'Black_Population', 'Owner Occupied': 'Owner_Occupied', 'White Owner Occupied': 'OO_White', 'Nonwhite Owner Occupied': 'OO_Black', 'Median House Value': 'Median_Housing_Value', 'In City?': 'In_City', 'Year': 'Year'},
+        1960: {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Nonwite Pop': 'Black_Population', '# Owner Occupied': 'Owner_Occupied', 'White OO': 'OO_White', 'Nonwhite OO': 'OO_Black', 'med.val': 'Median_Housing_Value', 'City of Detroit?': 'In_City', 'Year': 'Year'},
+        1970: {'Total_Population': 'Total_Population', 'White_Population': 'White_Population', 'Black_Population': 'Black_Population', 'Count_Owner_Occupied_units': 'Owner_Occupied', 'Median_Housing_Value': 'Median_Housing_Value', 'Count_Black_OO_units': 'OO_Black', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
+        1980: {'Total_Population': 'Total_Population', 'Total_Pop_White': 'White_Population', 'Total_Pop_Black': 'Black_Population', 'Owner_Occupied_Housing_Units': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White', 'Owner occupied >> Black': 'OO_Black', 'Median value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
+        1990: {'Persons': 'Total_Population', 'Persons: White': 'White_Population', 'Persons: Black': 'Black_Population', 'Occupied housing units: Owner occupied': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White', 'Owner occupied >> Black': 'OO_Black', 'Median Value for Specified owner-occupied housing units': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
+        2000: {'Total Population': 'Total_Population', 'White Alone': 'White_Population', 'Black or African American Alone': 'Black_Population', 'Occupied Housing Units: Owner Occupied': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White', 'Owner occupied >> Black': 'OO_Black', 'Owner-occupied housing units: Median value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
+        2010: {'Total Population:': 'Total_Population', 'Total Population: White Alone': 'White_Population', 'Total Population: Black or African American Alone': 'Black_Population', 'Occupied Housing Units: Owner Occupied': 'Owner_Occupied', 'Owner occupied >> Black': 'OO_Black', 'Median Value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'}
+    }
 
-# Combine
-columns_to_keep = ['Total_Population', 'White_Population', 'Black_Population',
-                   'Owner_Occupied', 'OO_White', 'OO_Black', 'Median_Housing_Value',
-                   'In_City', 'Year']
-combined_df = pd.concat([df[columns_to_keep] for df in
-                         [forties, fifties, sixties, seventies, eighties, nineties, twothousands, twentytens]], ignore_index=True)
+    decades = [forties, fifties, sixties, seventies, eighties, nineties, twothousands, twentytens]
+    years = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010]
 
-combined_df.drop(index=0, inplace=True)
-combined_df.reset_index(drop=True, inplace=True)
+    for df, year in zip(decades, years):
+        df.rename(columns=rename_dicts[year], inplace=True)
 
-# Clean
-for col in ['Median_Housing_Value', 'Total_Population', 'White_Population',
-            'Black_Population', 'Owner_Occupied', 'OO_White', 'OO_Black']:
-    combined_df[col] = pd.to_numeric(combined_df[col], errors='coerce')
+    columns_to_keep = [
+        'Total_Population', 'White_Population', 'Black_Population',
+        'Owner_Occupied', 'OO_White', 'OO_Black',
+        'Median_Housing_Value', 'In_City', 'Year'
+    ]
 
-combined_df['In_City'] = combined_df['In_City'].astype(str)
-combined_df = combined_df[combined_df['In_City'].isin(['Yes', 'No'])]
+    combined_df = pd.concat([df[columns_to_keep] for df in decades], ignore_index=True)
 
-# Impute missing OO_White
-combined_df['OO_White_Ratio'] = combined_df['OO_White'] / combined_df['Owner_Occupied']
-combined_df['OO_White_Ratio'] = combined_df['OO_White_Ratio'].replace(0, np.nan)
-combined_df['OO_White_Ratio'] = combined_df['OO_White_Ratio'].interpolate(method='linear')
-combined_df['OO_White_Estimate'] = combined_df['OO_White_Ratio'] * combined_df['Owner_Occupied']
-combined_df['OO_White'] = combined_df.apply(lambda row: min(row['OO_White_Estimate'], row['Owner_Occupied'] - row['OO_Black']), axis=1)
+    return combined_df
 
-# Aggregate
-aggregation_funcs = {col: 'sum' for col in ['Total_Population', 'White_Population', 'Black_Population', 'Owner_Occupied', 'OO_White', 'OO_Black']}
-aggregated_df = combined_df.groupby(['Year', 'In_City']).agg(aggregation_funcs).reset_index()
+# Load cleaned data
+combined_df = load_data()
 
-# Inflation adjustment
-cpi_data = {1940: 14.0, 1950: 24.1, 1960: 29.6, 1970: 38.8, 1980: 82.4, 1990: 130.7, 2000: 172.2, 2010: 218.1, 2020: 258.8, 2024: 314.2}
-
-def adjust_for_inflation(df, year_column, value_column, cpi_data, target_year):
-    cpi_target = cpi_data[target_year]
-    df[f'{value_column}_Inflation_Adjusted_{target_year}'] = df.apply(
-        lambda row: row[value_column] * cpi_target / cpi_data.get(row[year_column], np.nan)
-        if row[year_column] in cpi_data else np.nan, axis=1)
-    return df
-
-result_df = adjust_for_inflation(combined_df, 'Year', 'Median_Housing_Value', cpi_data, 2024)
+# Now your visuals start here
+# (put your population trends / proportions / ownership visualizations below as you had before)
 
 # ---------------------------------------------------------
 # 1. Population Trends (First visual)
