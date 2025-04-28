@@ -4,189 +4,205 @@ import altair as alt
 import numpy as np
 import warnings
 
+# Setup Streamlit
+st.set_page_config(page_title="History of Housing and Racism in Detroit", layout="wide")
+st.title("History of Housing and Racism in Detroit")
+st.write("*Nusrat Atika (natika), Christy Choi (choichr), Ellis Dyke (adyke)*")
+
 # Suppress warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
 
-st.set_page_config(layout="wide")
-st.title("Mapping Detroit's Housing Inequities (1940–2010)")
+# Load Data
+forties = pd.read_csv('census_data/1940.csv')
+fifties = pd.read_csv('census_data/1950.csv')
+sixties = pd.read_csv('census_data/1960.csv')
+seventies = pd.read_csv('census_data/1970.csv')
+eighties = pd.read_csv('census_data/1980.csv')
+nineties = pd.read_csv('census_data/1990.csv')
+twothousands = pd.read_csv('census_data/2000.csv')
+twentytens = pd.read_csv('census_data/2010.csv')
 
-@st.cache_data
-def load_data():
-    years = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010]
-    dfs = []
-    for year in years:
-        df = pd.read_csv(f"{year}.csv")
-        df['Year'] = year
-        dfs.append(df)
+# Add 'Year'
+for df, year in zip(
+    [forties, fifties, sixties, seventies, eighties, nineties, twothousands, twentytens],
+    [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010]):
+    df['Year'] = year
 
-    rename_mappings = {
-        1940: {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Black Pop': 'Black_Population',
-               'Owner Occupied': 'Owner_Occupied', 'OO White': 'OO_White', 'OO Black': 'OO_Black',
-               'Median Value': 'Median_Housing_Value', 'In City of Detroit?': 'In_City'},
-        1950: {'Total Pop': 'Total_Population', 'White': 'White_Population', 'Black': 'Black_Population',
-               'Owner Occupied': 'Owner_Occupied', 'White Owner Occupied': 'OO_White',
-               'Nonwhite Owner Occupied': 'OO_Black', 'Median House Value': 'Median_Housing_Value',
-               'In City?': 'In_City'},
-        1960: {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Nonwite Pop': 'Black_Population',
-               '# Owner Occupied': 'Owner_Occupied', 'White OO': 'OO_White', 'Nonwhite OO': 'OO_Black',
-               'med.val': 'Median_Housing_Value', 'City of Detroit?': 'In_City'},
-        1970: {'Total_Population': 'Total_Population', 'White_Population': 'White_Population',
-               'Black_Population': 'Black_Population', 'Count_Owner_Occupied_units': 'Owner_Occupied',
-               'Median_Housing_Value': 'Median_Housing_Value', 'Count_Black_OO_units': 'OO_Black',
-               'In city of Detroit?': 'In_City'},
-        1980: {'Total_Population': 'Total_Population', 'Total_Pop_White': 'White_Population',
-               'Total_Pop_Black': 'Black_Population', 'Owner_Occupied_Housing_Units': 'Owner_Occupied',
-               'Owner occupied >> White': 'OO_White', 'Owner occupied >> Black': 'OO_Black',
-               'Median value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City'},
-        1990: {'Persons': 'Total_Population', 'Persons: White': 'White_Population', 'Persons: Black': 'Black_Population',
-               'Occupied housing units: Owner occupied': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White',
-               'Owner occupied >> Black': 'OO_Black',
-               'Median Value for Specified owner-occupied housing units': 'Median_Housing_Value',
-               'In city of Detroit?': 'In_City'},
-        2000: {'Total Population': 'Total_Population', 'White Alone': 'White_Population',
-               'Black or African American Alone': 'Black_Population',
-               'Occupied Housing Units: Owner Occupied': 'Owner_Occupied',
-               'Owner occupied >> White': 'OO_White', 'Owner occupied >> Black': 'OO_Black',
-               'Owner-occupied housing units: Median value': 'Median_Housing_Value',
-               'In city of Detroit?': 'In_City'},
-        2010: {'Total Population:': 'Total_Population', 'Total Population: White Alone': 'White_Population',
-               'Total Population: Black or African American Alone': 'Black_Population',
-               'Occupied Housing Units: Owner Occupied': 'Owner_Occupied', 'Owner occupied >> Black': 'OO_Black',
-               'Median Value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City'}
-    }
+# Rename columns
+rename_dicts = [
+    {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Black Pop': 'Black_Population',
+     'Owner Occupied': 'Owner_Occupied', 'OO White': 'OO_White', 'OO Black': 'OO_Black',
+     'Median Value': 'Median_Housing_Value', 'In City of Detroit?': 'In_City', 'Year': 'Year'},
+    {'Total Pop': 'Total_Population', 'White': 'White_Population', 'Black': 'Black_Population',
+     'Owner Occupied': 'Owner_Occupied', 'White Owner Occupied': 'OO_White',
+     'Nonwhite Owner Occupied': 'OO_Black', 'Median House Value': 'Median_Housing_Value',
+     'In City?': 'In_City', 'Year': 'Year'},
+    {'Total Pop': 'Total_Population', 'White Pop': 'White_Population', 'Nonwite Pop': 'Black_Population',
+     '# Owner Occupied': 'Owner_Occupied', 'White OO': 'OO_White', 'Nonwhite OO': 'OO_Black',
+     'med.val': 'Median_Housing_Value', 'City of Detroit?': 'In_City', 'Year': 'Year'},
+    {'Total_Population': 'Total_Population', 'White_Population': 'White_Population', 'Black_Population': 'Black_Population',
+     'Count_Owner_Occupied_units': 'Owner_Occupied', 'Median_Housing_Value': 'Median_Housing_Value',
+     'Count_Black_OO_units': 'OO_Black', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
+    {'Total_Population': 'Total_Population', 'Total_Pop_White': 'White_Population', 'Total_Pop_Black': 'Black_Population',
+     'Owner_Occupied_Housing_Units': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White',
+     'Owner occupied >> Black': 'OO_Black', 'Median value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'},
+    {'Persons': 'Total_Population', 'Persons: White': 'White_Population', 'Persons: Black': 'Black_Population',
+     'Occupied housing units: Owner occupied': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White',
+     'Owner occupied >> Black': 'OO_Black', 'Median Value for Specified owner-occupied housing units': 'Median_Housing_Value',
+     'In city of Detroit?': 'In_City', 'Year': 'Year'},
+    {'Total Population': 'Total_Population', 'White Alone': 'White_Population', 'Black or African American Alone': 'Black_Population',
+     'Occupied Housing Units: Owner Occupied': 'Owner_Occupied', 'Owner occupied >> White': 'OO_White',
+     'Owner occupied >> Black': 'OO_Black', 'Owner-occupied housing units: Median value': 'Median_Housing_Value',
+     'In city of Detroit?': 'In_City', 'Year': 'Year'},
+    {'Total Population:': 'Total_Population', 'Total Population: White Alone': 'White_Population',
+     'Total Population: Black or African American Alone': 'Black_Population',
+     'Occupied Housing Units: Owner Occupied': 'Owner_Occupied', 'Owner occupied >> Black': 'OO_Black',
+     'Median Value': 'Median_Housing_Value', 'In city of Detroit?': 'In_City', 'Year': 'Year'}
+]
 
-    for i, df in enumerate(dfs):
-        df.rename(columns=rename_mappings[years[i]], inplace=True)
+for df, rename_dict in zip(
+    [forties, fifties, sixties, seventies, eighties, nineties, twothousands, twentytens],
+    rename_dicts):
+    df.rename(columns=rename_dict, inplace=True)
 
-    combined = pd.concat(dfs, ignore_index=True)
-    combined = combined[[col for col in ['Total_Population', 'White_Population', 'Black_Population',
-                                          'Owner_Occupied', 'OO_White', 'OO_Black', 'Median_Housing_Value',
-                                          'In_City', 'Year'] if col in combined.columns]]
+# Combine
+columns_to_keep = ['Total_Population', 'White_Population', 'Black_Population',
+                   'Owner_Occupied', 'OO_White', 'OO_Black', 'Median_Housing_Value',
+                   'In_City', 'Year']
+combined_df = pd.concat([df[columns_to_keep] for df in
+                         [forties, fifties, sixties, seventies, eighties, nineties, twothousands, twentytens]], ignore_index=True)
 
-    for col in ['Total_Population', 'White_Population', 'Black_Population', 'Owner_Occupied', 'OO_White', 'OO_Black', 'Median_Housing_Value']:
-        combined[col] = pd.to_numeric(combined[col], errors='coerce')
+combined_df.drop(index=0, inplace=True)
+combined_df.reset_index(drop=True, inplace=True)
 
-    combined['In_City'] = combined['In_City'].astype(str)
-    combined = combined[combined['In_City'].isin(['Yes', 'No'])]
+# Clean
+for col in ['Median_Housing_Value', 'Total_Population', 'White_Population',
+            'Black_Population', 'Owner_Occupied', 'OO_White', 'OO_Black']:
+    combined_df[col] = pd.to_numeric(combined_df[col], errors='coerce')
 
-    return combined
+combined_df['In_City'] = combined_df['In_City'].astype(str)
+combined_df = combined_df[combined_df['In_City'].isin(['Yes', 'No'])]
 
-# Load data
-df = load_data()
+# Impute missing OO_White
+combined_df['OO_White_Ratio'] = combined_df['OO_White'] / combined_df['Owner_Occupied']
+combined_df['OO_White_Ratio'] = combined_df['OO_White_Ratio'].replace(0, np.nan)
+combined_df['OO_White_Ratio'] = combined_df['OO_White_Ratio'].interpolate(method='linear')
+combined_df['OO_White_Estimate'] = combined_df['OO_White_Ratio'] * combined_df['Owner_Occupied']
+combined_df['OO_White'] = combined_df.apply(lambda row: min(row['OO_White_Estimate'], row['Owner_Occupied'] - row['OO_Black']), axis=1)
+
+# Aggregate
+aggregation_funcs = {col: 'sum' for col in ['Total_Population', 'White_Population', 'Black_Population', 'Owner_Occupied', 'OO_White', 'OO_Black']}
+aggregated_df = combined_df.groupby(['Year', 'In_City']).agg(aggregation_funcs).reset_index()
 
 # Inflation adjustment
-cpi_data = {1940:14.0, 1950:24.1, 1960:29.6, 1970:38.8, 1980:82.4, 1990:130.7, 2000:172.2, 2010:218.1, 2020:258.8, 2024:314.2}
+cpi_data = {1940: 14.0, 1950: 24.1, 1960: 29.6, 1970: 38.8, 1980: 82.4, 1990: 130.7, 2000: 172.2, 2010: 218.1, 2020: 258.8, 2024: 314.2}
 
-def adjust_for_inflation(df, value_col, year_col, cpi_target=314.2):
-    df[f'{value_col}_Inflation_Adjusted_2024'] = df.apply(
-        lambda row: row[value_col] * cpi_target / cpi_data.get(row[year_col], np.nan)
-        if row[year_col] in cpi_data else np.nan, axis=1)
+def adjust_for_inflation(df, year_column, value_column, cpi_data, target_year):
+    cpi_target = cpi_data[target_year]
+    df[f'{value_column}_Inflation_Adjusted_{target_year}'] = df.apply(
+        lambda row: row[value_column] * cpi_target / cpi_data.get(row[year_column], np.nan)
+        if row[year_column] in cpi_data else np.nan, axis=1)
     return df
 
-result_df = adjust_for_inflation(df.copy(), 'Median_Housing_Value', 'Year')
+result_df = adjust_for_inflation(combined_df, 'Year', 'Median_Housing_Value', cpi_data, 2024)
 
-# --- VISUAL 1: Population Trends ---
+# ---------------------------------------------------------
+# 1. Population Trends (First visual)
+
 st.header("Population Trends Over Time by Race and Location")
+combined_data_long = aggregated_df.melt(id_vars=['Year', 'In_City'],
+                                        value_vars=['Total_Population', 'White_Population', 'Black_Population'],
+                                        var_name='Population_Type', value_name='Population')
 
-agg = df.groupby(['Year', 'In_City']).sum().reset_index()
-pop_long = agg.melt(id_vars=['Year', 'In_City'], value_vars=['Total_Population', 'White_Population', 'Black_Population'],
-                    var_name='Population_Type', value_name='Population')
+vline_selection = alt.selection_point(on='mousemove', nearest=True, fields=['Year'], empty='none')
 
-vline = alt.selection_point(fields=['Year'], nearest=True, on='mouseover')
-zoom = alt.selection_interval(encodings=['x'])
-
-base = alt.Chart(pop_long).encode(
+base_chart = alt.Chart(combined_data_long).encode(
     x='Year:O',
-    y='Population:Q',
+    y=alt.Y('Population:Q', scale=alt.Scale(domain=[0, 3500000])),
     color='Population_Type:N',
-    strokeDash='In_City:N',
-    tooltip=['Year', 'Population_Type', 'In_City', 'Population']
+    strokeDash=alt.StrokeDash('In_City:N'),
+    tooltip=['Year:O', 'Population_Type:N', 'In_City:N', 'Population:Q']
 )
 
-points = base.mark_point().add_params(vline).encode(
-    opacity=alt.condition(vline, alt.value(1), alt.value(0.2))
-)
+line_chart = base_chart.mark_line(point=True).encode(
+    opacity=alt.condition(vline_selection, alt.value(1), alt.value(0.2))
+).add_params(vline_selection)
 
-rule = base.mark_rule(color='gray').encode(
-    opacity=alt.condition(vline, alt.value(0.5), alt.value(0))
-)
+st.altair_chart(line_chart, use_container_width=True)
 
-upper = (points + rule).properties(height=400).add_params(zoom).transform_filter(zoom)
-lower = base.mark_line(point=True).transform_filter(zoom).properties(height=200)
+# ---------------------------------------------------------
+# 2. Proportion of Black and White Populations
 
-st.altair_chart(alt.vconcat(upper, lower).resolve_scale(color='shared').interactive(), use_container_width=True)
-
-# --- VISUAL 2: Proportion of Black and White Populations ---
 st.header("Proportion of Black and White Populations Over Time by Location")
+viz_data = combined_data_long.copy()
+viz_data['Population_Type'] = viz_data['Population_Type'].astype('category')
+viz_data['In_City'] = viz_data['In_City'].replace({'No': 'In the Suburbs', 'Yes': 'In the City of Detroit'})
 
-viz = pop_long.pivot(index=['Year', 'In_City'], columns='Population_Type', values='Population').reset_index()
-viz['White_Proportion'] = viz['White_Population'] / viz['Total_Population']
-viz['Black_Proportion'] = viz['Black_Population'] / viz['Total_Population']
+filtered_data = viz_data[viz_data['Population_Type'].isin(['White_Population', 'Black_Population', 'Total_Population'])]
 
-prop_long = viz.melt(id_vars=['Year', 'In_City'], value_vars=['White_Proportion', 'Black_Proportion'],
-                     var_name='Race', value_name='Proportion')
+pivot_data = filtered_data.pivot_table(index=['Year', 'In_City'],
+                                       columns='Population_Type',
+                                       values='Population',
+                                       aggfunc='sum').reset_index()
 
-highlight = alt.selection_point(fields=['Year'], empty='none', clear=False)
-population_type_selection = alt.selection_point(fields=['Race'], bind='legend')
-y_scroll = alt.selection_interval(bind='scales', encodings=['y'])
+pivot_data['White_Proportion'] = pivot_data['White_Population'] / pivot_data['Total_Population']
+pivot_data['Black_Proportion'] = pivot_data['Black_Population'] / pivot_data['Total_Population']
 
-bars = alt.Chart(prop_long).mark_bar().encode(
-    x=alt.X('Year:O', sort='ascending'),
+proportions_long = pivot_data.melt(id_vars=['Year', 'In_City'],
+                                   value_vars=['White_Proportion', 'Black_Proportion'],
+                                   var_name='Population_Type',
+                                   value_name='Proportion')
+
+bar_chart = alt.Chart(proportions_long).mark_bar().encode(
+    x='Year:O',
     y='Proportion:Q',
-    color='Race:N',
-    tooltip=['Year', 'Race', alt.Tooltip('Proportion:Q', format=".2%")],
-    opacity=alt.condition(population_type_selection & highlight, alt.value(0.9), alt.value(0.2))
-).add_params(population_type_selection, highlight, y_scroll)
+    color='Population_Type:N',
+    tooltip=['Year', 'Population_Type', alt.Tooltip('Proportion:Q', format='.2%')]
+)
 
-st.altair_chart(bars.properties(width=800, height=400), use_container_width=True)
+st.altair_chart(bar_chart, use_container_width=True)
 
-# --- VISUAL 3: Homeownership by Race ---
+# ---------------------------------------------------------
+# 3. Homeownership Trends
+
 st.header("Demographics and Homeownership by Race in Detroit")
+df_city = aggregated_df[aggregated_df['In_City'] == 'Yes'].copy()
+df_city['White_Homeownership_Rate'] = df_city['OO_White'] / df_city['Owner_Occupied']
+df_city['Black_Homeownership_Rate'] = df_city['OO_Black'] / df_city['Owner_Occupied']
 
-detroit = agg[agg['In_City'] == 'Yes'].copy()
-detroit['White_Homeownership_Rate'] = detroit['OO_White'] / detroit['Owner_Occupied']
-detroit['Black_Homeownership_Rate'] = detroit['OO_Black'] / detroit['Owner_Occupied']
+melted_homeownership = df_city[['Year', 'White_Homeownership_Rate', 'Black_Homeownership_Rate']].melt(
+    id_vars=['Year'], var_name='Metric', value_name='Rate'
+)
 
-home_long = detroit.melt(id_vars='Year', value_vars=['White_Homeownership_Rate', 'Black_Homeownership_Rate'],
-                         var_name='Metric', value_name='Rate')
-
-race_dropdown = alt.binding_select(options=['All', 'White_Homeownership_Rate', 'Black_Homeownership_Rate'],
-                                   name='Select Race:')
-race_selection = alt.selection_point(fields=['Metric'], bind=race_dropdown, empty='all')
-
-hover = alt.selection_point(fields=['Year'], nearest=True, on='mouseover', empty='none')
-click = alt.selection_point(fields=['Year'], on='click', toggle=False, empty='none')
-
-home_chart = alt.Chart(home_long).mark_line(point=True).encode(
+home_chart = alt.Chart(melted_homeownership).mark_line(point=True).encode(
     x='Year:O',
     y=alt.Y('Rate:Q', axis=alt.Axis(format='%')),
     color='Metric:N',
-    tooltip=['Year', 'Metric', alt.Tooltip('Rate:Q', format='.2%')],
-    opacity=alt.condition(race_selection, alt.value(1), alt.value(0.2))
-).add_params(race_selection, hover, click)
+    tooltip=['Year', 'Metric', alt.Tooltip('Rate:Q', format='.2%')]
+)
 
-st.altair_chart(home_chart.properties(width=800, height=400).interactive(), use_container_width=True)
+st.altair_chart(home_chart, use_container_width=True)
 
-# --- VISUAL 4: Home Value by Black Population Bracket ---
+# ---------------------------------------------------------
+# 4. Housing Values by Black Population %
+
 st.header("Trends in Median Home Values by Black Population Proportion")
-
-city = result_df[result_df['In_City'] == 'Yes'].copy()
-city['Black_Pop_Proportion'] = city['Black_Population'] / city['Total_Population']
+housing_data = result_df[result_df['In_City'] == 'Yes'].copy()
+housing_data['Black_Pop_Proportion'] = housing_data['Black_Population'] / housing_data['Total_Population']
 
 bins = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1.0]
-labels = ['0-10%', '10-20%', '20-30%', '30-40%', '40-50%',
-          '50-60%', '60-70%', '70-80%', '80-90%', '90-100%']
+labels = ['0-10%', '10-20%', '20-30%', '30-40%', '40-50%', '50-60%', '60-70%', '70-80%', '80-90%', '90-100%']
+housing_data['Black_Pop_Percentage_Bracket'] = pd.cut(housing_data['Black_Pop_Proportion'], bins=bins, labels=labels)
 
-city['Bracket'] = pd.cut(city['Black_Pop_Proportion'], bins=bins, labels=labels)
+percentage_selection = alt.selection_point(fields=['Black_Pop_Percentage_Bracket'],
+                                            bind=alt.binding_select(options=labels, name='Select Black %: '))
 
-selector = alt.selection_point(fields=['Bracket'], bind=alt.binding_select(options=labels, name='Select Black %:'))
-
-scatter = alt.Chart(city).mark_circle(size=100).encode(
+scatter_chart = alt.Chart(housing_data).mark_circle(size=100, opacity=0.7, stroke='black').encode(
     x='Year:O',
     y=alt.Y('Median_Housing_Value_Inflation_Adjusted_2024:Q', axis=alt.Axis(format='$,.0f')),
     color='Total_Population:Q',
     tooltip=['Year', 'Total_Population', 'Black_Pop_Proportion', 'Median_Housing_Value_Inflation_Adjusted_2024']
-).add_params(selector).transform_filter(selector)
+).add_params(percentage_selection).transform_filter(percentage_selection)
 
-st.altair_chart(scatter.properties(width=800, height=450).interactive(), use_container_width=True)
+st.altair_chart(scatter_chart, use_container_width=True)
