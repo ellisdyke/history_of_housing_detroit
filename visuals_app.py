@@ -14,14 +14,14 @@ st.title("Mapping Detroit's Housing Inequities (1940–2010)")
 @st.cache_data
 def load_data():
     # Load each decade
-    forties = pd.read_csv('census_data/1940.csv')
-    fifties = pd.read_csv('census_data/1950.csv')
-    sixties = pd.read_csv('census_data/1960.csv')
-    seventies = pd.read_csv('census_data/1970.csv')
-    eighties = pd.read_csv('census_data/1980.csv')
-    nineties = pd.read_csv('census_data/1990.csv')
-    twothousands = pd.read_csv('census_data/2000.csv')
-    twentytens = pd.read_csv('census_data/2010.csv')
+    forties = pd.read_csv('1940.csv')
+    fifties = pd.read_csv('1950.csv')
+    sixties = pd.read_csv('1960.csv')
+    seventies = pd.read_csv('1970.csv')
+    eighties = pd.read_csv('1980.csv')
+    nineties = pd.read_csv('1990.csv')
+    twothousands = pd.read_csv('2000.csv')
+    twentytens = pd.read_csv('2010.csv')
 
     forties['Year'] = 1940
     fifties['Year'] = 1950
